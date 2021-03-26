@@ -12,7 +12,7 @@ import torch.utils.data as data
 
 class SKU(data.Dataset):
   num_classes = 1
-  default_resolution = [1120, 1120]
+  default_resolution = [512, 512]
   mean = np.array([123.675, 116.28, 103.53],
                    dtype=np.float32).reshape(1, 1, 3)
   std  = np.array([58.395, 57.12, 57.375],
@@ -20,7 +20,7 @@ class SKU(data.Dataset):
 
   def __init__(self, opt, split):
     super(SKU, self).__init__()
-    self.data_dir = os.path.join(opt.data_dir, 'sku')
+    self.data_dir = os.path.join('D:\\ubuntu18.04\\rootfs\\home\\sdy\\workspace\\data', 'SKU110K_fixed')
     self.img_dir = os.path.join(self.data_dir, 'images')
     if split == 'val':
       self.annot_path = os.path.join(

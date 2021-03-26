@@ -13,7 +13,9 @@ from torch import nn
 import torch.nn.functional as F
 import torch.utils.model_zoo as model_zoo
 
-from .DCNv2.dcn_v2 import DCN
+# from .DCNv2.dcn_v2 import DCN
+from .DCNv0.modules.deform_conv import DeformConvPack
+from .rotation_conv_utils import FeatureSelectionModule
 
 BN_MOMENTUM = 0.1
 logger = logging.getLogger(__name__)
@@ -349,8 +351,8 @@ class DeformConv(nn.Module):
             nn.BatchNorm2d(cho, momentum=BN_MOMENTUM),
             nn.ReLU(inplace=True)
         )
-        self.conv = DCN(chi, cho, kernel_size=(3,3), stride=1, padding=1, dilation=1, deformable_groups=1)
-
+        # self.conv = DCN(chi, cho, kernel_size=(3,3), stride=1, padding=1, dilation=1, deformable_groups=1)
+        self.conv = DeformConvPack(chi, cho, kernel_size=(3,3), stride=1, padding=1, dilation=1, deformable_groups=1)
     def forward(self, x):
         x = self.conv(x)
         x = self.actf(x)
@@ -441,7 +443,7 @@ class DLASeg(nn.Module):
 
         self.ida_up = IDAUp(out_channel, channels[self.first_level:self.last_level], 
                             [2 ** i for i in range(self.last_level - self.first_level)])
-        
+        self.fsm = FeatureSelectionModule(dim_in=out_channel,rot=True)
         self.heads = heads
         for head in self.heads:
             classes = self.heads[head]
@@ -475,10 +477,12 @@ class DLASeg(nn.Module):
         for i in range(self.last_level - self.first_level):
             y.append(x[i].clone())
         self.ida_up(y, 0, len(y))
-
+        out,att = self.fsm(y[-1])
+        # print(out.shape, att.shape)
         z = {}
         for head in self.heads:
-            z[head] = self.__getattr__(head)(y[-1])
+
+            z[head] = self.__getattr__(head)(out)
         return [z]
     
 

@@ -58,7 +58,7 @@ class opts(object):
                              choices=['white', 'black'])
     
     # model
-    self.parser.add_argument('--arch', default='res_50',
+    self.parser.add_argument('--arch', default='dla_34',
                              help='model architecture. Currently tested'
                                   'res_18 | res_101 | resdcn_18 | resdcn_101 |'
                                   'dlav0_34 | dla_34 | hourglass')
@@ -335,7 +335,7 @@ class opts(object):
 
   def init(self, args=''):
     default_dataset_info = {
-      'ctdet': {'default_resolution':[1120,1120], 'num_classes': 1,
+      'ctdet': {'default_resolution':[512,512], 'num_classes': 1,
                 'mean': [123.675, 116.28, 103.53], 'std': [58.395, 57.12, 57.375],
                 'dataset': 'sku'},
       'exdet': {'default_resolution': [512, 512], 'num_classes': 80, 
