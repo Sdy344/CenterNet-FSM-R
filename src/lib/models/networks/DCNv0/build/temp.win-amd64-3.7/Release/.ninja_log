@@ -1,0 +1,8 @@
+# ninja log v5
+8	19923	6384385120411650	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/cpu/modulated_deform_cpu.obj	41c04d8a2d43d60d
+0	21435	6384385123351831	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/cpu/deform_cpu.obj	f549c681def4531b
+4	21741	6384385129861177	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/cpu/deform_psroi_pooling_cpu.obj	e1b5303b63095dcb
+2	41632	6384385337699541	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/vision.obj	1a9f3ae6165b8ef6
+12	62589	6384385546992698	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/cuda/modulated_deform_conv_cuda.obj	adc6c3fb100b2cd9
+10	63566	6384385556939898	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/cuda/deform_conv_cuda.obj	d64ab76fad7481db
+6	64083	6384385561946427	E:/ENV/Deformable-Convolution-V2-PyTorch/build/temp.win-amd64-3.7/Release/ENV/Deformable-Convolution-V2-PyTorch/src/cuda/deform_psroi_pooling_cuda.obj	3280645828a9b831
