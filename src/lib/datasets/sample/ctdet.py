@@ -16,7 +16,7 @@ import math
 
 class CTDetDataset(data.Dataset):
   def _coco_box_to_bbox(self, box):
-    bbox = np.array([box[0], box[1], box[0] + box[2], box[1] + box[3]],
+    bbox = np.array([box[0]-int(box[2]/2), box[1]-int(box[3]/2), box[0] + int(box[2]/2), box[1] + int(box[3]/2)],
                     dtype=np.float32)
     return bbox
 
@@ -85,6 +85,8 @@ class CTDetDataset(data.Dataset):
 
     hm = np.zeros((num_classes, output_h, output_w), dtype=np.float32)
     wh = np.zeros((self.max_objs, 2), dtype=np.float32)
+    ag = np.zeros((self.max_objs, 1), dtype=np.float32)
+
     dense_wh = np.zeros((2, output_h, output_w), dtype=np.float32)
     reg = np.zeros((self.max_objs, 2), dtype=np.float32)
     ind = np.zeros((self.max_objs), dtype=np.int64)
@@ -98,7 +100,7 @@ class CTDetDataset(data.Dataset):
     gt_det = []
     for k in range(num_objs):
       ann = anns[k]
-      bbox = self._coco_box_to_bbox(ann['bbox'])
+      bbox = self._coco_box_to_bbox(ann['rbbox'])
       cls_id = int(self.cat_ids[ann['category_id']])
       if flipped:
         bbox[[0, 2]] = width - bbox[[2, 0]] - 1

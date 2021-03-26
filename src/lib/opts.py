@@ -161,6 +161,8 @@ class opts(object):
                              help='loss weight for keypoint local offsets.')
     self.parser.add_argument('--wh_weight', type=float, default=0.1,
                              help='loss weight for bounding box size.')
+    self.parser.add_argument('--ag_weight', type=float, default=0.5,
+                             help='loss weight for bounding angle size.')
     # multi_pose
     self.parser.add_argument('--hp_weight', type=float, default=1,
                              help='loss weight for human pose offset.')
@@ -315,7 +317,8 @@ class opts(object):
     elif opt.task == 'ctdet':
       # assert opt.dataset in ['pascal', 'coco']
       opt.heads = {'hm': opt.num_classes,
-                   'wh': 2 if not opt.cat_spec_wh else 2 * opt.num_classes}
+                   'wh': 2 if not opt.cat_spec_wh else 2 * opt.num_classes,
+                   'ag': 1}
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
     elif opt.task == 'multi_pose':
